@@ -40,6 +40,7 @@ class Avatar extends \TYPO3\CMS\Backend\Backend\Avatar\Avatar {
 	 * @return string
 	 */
 	public function render(array $backendUser = NULL, $size = 32, $showIcon = FALSE) {
+		$size = (int)$size;
 		if (!is_array($backendUser)) {
 			$backendUser = $this->getBackendUser()->user;
 		}
