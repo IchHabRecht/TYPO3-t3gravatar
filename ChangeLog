@@ -1,1 +1,5 @@
+2015-08-12         [RELEASE] Release of t3gravatar 0.2.0 (Nicole Cordes)
+2015-08-12 0aba86d [FEATURE] Add caching of Gravatar images (Nicole Cordes)
+2015-08-12 7037d26 [BUGFIX] Ensure size parameter is always an integer (Nicole Cordes)
+
 2015-08-11         [RELEASE] Release of t3gravatar 0.1.0

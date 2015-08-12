@@ -3,7 +3,7 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "t3gravatar".
  *
- * Auto generated 11-08-2015 23:17
+ * Auto generated 12-08-2015 17:53
  *
  * Manual updates:
  * Only the data in the array - everything else is removed by next
@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = array (
 	'author' => 'Nicole Cordes',
 	'author_email' => 'typo3@cordes.co',
 	'author_company' => 'CPS-IT GmbH',
-	'version' => '0.1.0',
+	'version' => '0.2.0',
 	'constraints' => 
 	array (
 		'depends' => 
@@ -35,6 +35,6 @@ $EM_CONF[$_EXTKEY] = array (
 		array (
 		),
 	),
-	'_md5_values_when_last_written' => 'a:4:{s:9:"ChangeLog";s:4:"d351";s:12:"ext_icon.png";s:4:"130e";s:17:"ext_localconf.php";s:4:"1719";s:25:"Classes/Xclass/Avatar.php";s:4:"fbc9";}',
+	'_md5_values_when_last_written' => 'a:4:{s:9:"ChangeLog";s:4:"b6a9";s:12:"ext_icon.png";s:4:"130e";s:17:"ext_localconf.php";s:4:"1719";s:25:"Classes/Xclass/Avatar.php";s:4:"fc9e";}',
 );
 
