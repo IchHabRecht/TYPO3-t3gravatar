@@ -26,6 +26,7 @@ namespace IchHabRecht\T3gravatar\Xclass;
 
 use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 
 /**
@@ -53,11 +54,17 @@ class Avatar extends \TYPO3\CMS\Backend\Backend\Avatar\Avatar {
 			return $image;
 		}
 
-		$gravatar = 'https://www.gravatar.com/avatar/' . md5(strtolower($backendUser['email'])) . '?s=' . $size . '&d=404';
-		$gravatarImage = GeneralUtility::getUrl($gravatar);
+		$cachedFilePath = PATH_site . 'typo3temp/t3gravatar/';
+		$cachedFileName = sha1($backendUser['email'] . $size) . '.jpg';
+		if (!file_exists($cachedFilePath . $cachedFileName)) {
+			$gravatar = 'https://www.gravatar.com/avatar/' . md5(strtolower($backendUser['email'])) . '?s=' . $size . '&d=404';
+			$gravatarImage = GeneralUtility::getUrl($gravatar);
 
-		if (empty($gravatarImage)) {
-			return $image;
+			if (empty($gravatarImage)) {
+				return $image;
+			}
+
+			GeneralUtility::writeFileToTypo3tempDir($cachedFileName, $gravatarImage);
 		}
 
 		// Icon
@@ -66,8 +73,9 @@ class Avatar extends \TYPO3\CMS\Backend\Backend\Avatar\Avatar {
 			$icon = '<span class="avatar-icon">' . IconUtility::getSpriteIconForRecord('be_users', $backendUser) . '</span>';
 		}
 
+		$relativeFilePath = PathUtility::getRelativePath(PATH_typo3, $cachedFilePath);
 		return '<span class="avatar"><span class="avatar-image">'
-			. '<img src="' . $gravatar . '" width="' . $size . '" height="' . $size . '" /></span>' . $icon . '</span>';
+			. '<img src="' . $relativeFilePath . $cachedFileName . '" width="' . $size . '" height="' . $size . '" /></span>' . $icon . '</span>';
 	}
 }
 
