@@ -64,7 +64,7 @@ class Avatar extends \TYPO3\CMS\Backend\Backend\Avatar\Avatar {
 				return $image;
 			}
 
-			GeneralUtility::writeFileToTypo3tempDir($cachedFileName, $gravatarImage);
+			GeneralUtility::writeFileToTypo3tempDir($cachedFilePath . $cachedFileName, $gravatarImage);
 		}
 
 		// Icon
