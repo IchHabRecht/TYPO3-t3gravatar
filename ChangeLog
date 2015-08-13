@@ -1,3 +1,6 @@
+2015-08-13         [RELEASE] Release of t3gravatar 0.2.1 (Nicole Cordes)
+2015-08-13 2270323 [BUGFIX] Write cachefile to proper directory (Sebastian Michaelsen)
+
 2015-08-12         [RELEASE] Release of t3gravatar 0.2.0 (Nicole Cordes)
 2015-08-12 0aba86d [FEATURE] Add caching of Gravatar images (Nicole Cordes)
 2015-08-12 7037d26 [BUGFIX] Ensure size parameter is always an integer (Nicole Cordes)
