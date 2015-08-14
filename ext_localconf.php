@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 if (TYPO3_MODE == 'BE') {
-	// Xclass Avatar since AvatarProvider API is not present
+	// Xclass Avatar when AvatarProvider API is not present
 	if (!interface_exists('TYPO3\\CMS\\Backend\\Backend\\Avatar\\AvatarProviderInterface')) {
 		$className = \TYPO3\CMS\Backend\Backend\Avatar\Avatar::class;
 		while (isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][$className])) {
