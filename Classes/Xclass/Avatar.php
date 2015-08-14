@@ -54,7 +54,7 @@ class Avatar extends \TYPO3\CMS\Backend\Backend\Avatar\Avatar {
 		}
 
 		// Get Gravatar Url
-		$gravatarUrl = GeneralUtility::makeInstance(BaseGravatarProvider::class)->render(
+		$gravatarUrl = GeneralUtility::makeInstance(BaseGravatarProvider::class)->getImage(
 				$backendUser,
 				$size
 			);
