@@ -1,0 +1,11 @@
+# cat=Gravatar; type=options[Transparent/blank=, Skip provider if gravatar doesn't exists=404, Mystery man=mm, Identicon=identicon, Monsterid=monsterid, Wavatar=wavatar, retro=retro, Use fallback image url=url]; label=Fallback behaviour: see https://www.gravatar.com/site/implement/images/
+fallback =
+
+# cat=Gravatar; type=string; label=Fallback image url: MUST be publicly available, see https://www.gravatar.com/site/implement/images/
+fallbackImageUrl =
+
+# cat=Gravatar; type=boolean; label=Use Gravatar service even if email address is empty: Normally the Gravatar service is only requested when a email address is set. With this setting you can also enable is for BE users without email address. The above will always be used then.
+forceProvider =
+
+# cat=Gravatar; type=boolean; label=Cache Gravatar locally: Found Gravatar image is cached in typo3temp/
+cacheLocal =
