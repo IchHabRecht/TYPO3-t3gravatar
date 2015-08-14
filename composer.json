@@ -1,0 +1,20 @@
+{
+	"name": "ichhabrecht/t3gravatar",
+	"type": "typo3-cms-extension",
+	"description": "AvatarProvider for Gravatar support in backend",
+	"license": ["GPL-2.0+"],
+	"version": "0.3.0",
+	"require": {
+		"typo3/cms-core": ">=7.4.0,<8.0"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "0.3.x-dev"
+		}
+  },
+	"autoload": {
+		"psr-4": {
+			"IchHabRecht\\T3gravatar\\": "Classes/"
+		}
+	}
+}

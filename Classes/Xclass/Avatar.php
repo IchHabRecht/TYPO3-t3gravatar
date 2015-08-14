@@ -24,6 +24,7 @@ namespace IchHabRecht\T3gravatar\Xclass;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use IchHabRecht\T3gravatar\AvatarProvider\BaseGravatarProvider;
 use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -48,23 +49,18 @@ class Avatar extends \TYPO3\CMS\Backend\Backend\Avatar\Avatar {
 
 		$image = parent::render($backendUser, $size, $showIcon);
 
-		if (!StringUtility::beginsWith($image, '<span class="avatar"><span class="avatar-image"></span>')
-			|| empty($backendUser['email'])
-		) {
+		if (!StringUtility::beginsWith($image, '<span class="avatar"><span class="avatar-image"></span>')) {
 			return $image;
 		}
 
-		$cachedFilePath = PATH_site . 'typo3temp/t3gravatar/';
-		$cachedFileName = sha1($backendUser['email'] . $size) . '.jpg';
-		if (!file_exists($cachedFilePath . $cachedFileName)) {
-			$gravatar = 'https://www.gravatar.com/avatar/' . md5(strtolower($backendUser['email'])) . '?s=' . $size . '&d=404';
-			$gravatarImage = GeneralUtility::getUrl($gravatar);
+		// Get Gravatar Url
+		$gravatarUrl = GeneralUtility::makeInstance(BaseGravatarProvider::class)->getImage(
+				$backendUser,
+				$size
+			);
 
-			if (empty($gravatarImage)) {
-				return $image;
-			}
-
-			GeneralUtility::writeFileToTypo3tempDir($cachedFilePath . $cachedFileName, $gravatarImage);
+		if (!$gravatarUrl) {
+			return $image;
 		}
 
 		// Icon
@@ -73,10 +69,15 @@ class Avatar extends \TYPO3\CMS\Backend\Backend\Avatar\Avatar {
 			$icon = '<span class="avatar-icon">' . IconUtility::getSpriteIconForRecord('be_users', $backendUser) . '</span>';
 		}
 
-		$relativeFilePath = PathUtility::getRelativePath(PATH_typo3, $cachedFilePath);
+		// Make url relative to current script when no valid url
+		if(!GeneralUtility::isValidUrl($gravatarUrl)) {
+			$absolutePathToContainingFolder = PathUtility::dirname(PATH_site . $gravatarUrl);
+			$pathPart = PathUtility::getRelativePathTo($absolutePathToContainingFolder);
+			$filePart = substr(PATH_site . $gravatarUrl, strlen($absolutePathToContainingFolder) + 1);
+			$gravatarUrl = $pathPart . $filePart;
+		}
+
 		return '<span class="avatar"><span class="avatar-image">'
-			. '<img src="' . $relativeFilePath . $cachedFileName . '" width="' . $size . '" height="' . $size . '" /></span>' . $icon . '</span>';
+			. '<img src="' . $gravatarUrl . '" width="' . $size . '" height="' . $size . '" /></span>' . $icon . '</span>';
 	}
 }
-
-?>
